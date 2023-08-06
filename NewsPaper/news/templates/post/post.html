@@ -1,0 +1,13 @@
+{% extends 'layout/base.html' %}
+{% load custom_filters %}
+{% block title %}
+News | {{ post.title }}
+{% endblock title %}
+{% block content %}
+<div>
+    <h2>{{ post.title|Censor }}</h2>
+    <p> {{ post.creationData|date:'d F Y, H:i' }} </p>
+    <p> {{ post.text|Censor }} </p>
+</div>
+<hr>
+{% endblock content %}

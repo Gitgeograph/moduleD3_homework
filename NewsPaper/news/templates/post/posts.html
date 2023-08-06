@@ -1,0 +1,29 @@
+{% extends 'layout/base.html' %}
+{% load custom_filters %} 
+
+{% block title %}
+News
+{% endblock title %}
+
+
+{% block content %}
+<h1>Все новости</h1>
+<h5> Всего новостей: {{ posts|length }} </h5>
+<hr>
+{% if posts %}
+    {% for post in posts %}
+        <div class="card">
+            <div class="card-header">
+                <h2><a href="{% url 'news:postDetail' post.pk %}">{{ post.title|Censor }}</a></h2>
+                <p> {{ post.creationData|date:'d F Y, H:i' }} </p>
+            </div>
+            <div class="card-body">
+                <p> {{ post.text|truncatechars:50 |Censor }} </p>
+            </div> 
+        </div>
+        <hr>
+    {% endfor %}
+{% else %}
+    <h2>Постов нет</h2>
+{% endif %}
+{% endblock content %}
